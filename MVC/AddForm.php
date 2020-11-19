@@ -1,6 +1,14 @@
 <?php
 session_start();
 require("dbconnect.php");
+require("todoModel.php");
+
+$stuID = (int)$_GET['stuID'];
+$rs = getJobDetail($stuID);
+if (!$rs) {
+	echo "no data found";
+	exit(0);
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -14,7 +22,7 @@ require("dbconnect.php");
         申請人: <input name="name" type="text" id="name" /> <br>
         學號: <input name="id" type="text" id="id" /> <br>
         家庭狀況:<br>
-        母:<input name="mom_name" type="text" id="momo_name" /> <br>
+        母:<input name="mom_name" type="text" id="mom_name" /> <br>
         父:<input name="dad_name" type="text" id="dad_name" /> <br>
       申請補助種類:<select  name="subsidy_type" type="select" id="subsidy_type" /> 
 					<option value='1'>低收入戶</option>
