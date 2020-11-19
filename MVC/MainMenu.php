@@ -1,8 +1,8 @@
 <?php
 require("dbconnect.php");
 ?>
-<h1>hello</h1>
+<h1>清寒補助系統</h1>
 <a href="">學生</a>
 <a href="">導師</a>
-<a herf="">秘書</a>
+<a href="">秘書</a>
 <a href="">校長</a>
