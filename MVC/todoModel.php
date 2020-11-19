@@ -1,15 +1,15 @@
 <?php
 require_once("dbconnect.php");
 
-function addJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
+function addJob($id,$name, $dad_name, $mom_name, $subsidyType) {
 	global $conn;
-	$sql = "insert into todo (stuID, name, dad_name, mom_name, subsidyType) values ('$stuID','$name', '$dad_name', '$mom_name', $subsidyType);";
+	$sql = "insert into subsidyform (stuID, name, dad_name, mom_name, subsidyType) values ('$stuID','$name', '$dad_name', '$mom_name', $subsidyType);";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
 }
 
 function cancelJob($jobID) {
 	global $conn;
-	$sql = "update todo set status = 3 where id=$jobID and status <> 2;";
+	$sql = "update subsidyform set status = 3 where id=$jobID and status <> 2;";
 	mysqli_query($conn,$sql);
 	//return T/F
 }
@@ -19,7 +19,7 @@ function updateJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	if ($id== -1) {
 		addJob($stuID,$name, $dad_name, $mom_name, $subsidyType);
 	} else {
-		$sql = "update todo set title='$title', content='$msg', urgent='$urgent' where id=$id;";
+		$sql = "update subsidyform set stuID='$stuID', name='$name', dad_name='$dad_name', mom_name='$mom_name', subsidyType='$subsidyType' where id=$id;";
 		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 	}
 }
@@ -54,20 +54,20 @@ function getJobDetail($id) {
 
 function setFinished($jobID) {
 	global $conn;
-	$sql = "update todo set status = 1, finishTime=NOW() where id=$jobID and status = 0;";
+	$sql = "update subsidyform set status = 1, finishTime=NOW() where id=$jobID and status = 0;";
 	mysqli_query($conn,$sql) or die("MySQL query error"); //執行SQL
 	
 }
 
 function rejectJob($jobID){
 	global $conn;
-	$sql = "update todo set status = 0 where id=$jobID and status = 1;";
+	$sql = "update subsidyform set status = 0 where id=$jobID and status = 1;";
 	mysqli_query($conn,$sql);
 }
 
 function setClosed($jobID) {
 	global $conn;
-	$sql = "update todo set status = 2 where id=$jobID and status = 1;";
+	$sql = "update subsidyform set status = 2 where id=$jobID and status = 1;";
 	mysqli_query($conn,$sql);
 }
 
