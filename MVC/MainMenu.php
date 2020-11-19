@@ -6,3 +6,4 @@ require("dbconnect.php");
 <a href="">導師</a>
 <a href="">秘書</a>
 <a href="">校長</a>
+123
