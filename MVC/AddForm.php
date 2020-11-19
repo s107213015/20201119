@@ -11,11 +11,10 @@ require("dbconnect.php");
 <body>
 <h1>Add New Requisition</h1>
 <form method="post" action="todoSetContronl.php">
-
         申請人: <input name="name" type="text" id="name" /> <br>
         學號: <input name="id" type="text" id="id" /> <br>
         家庭狀況:<br>
-        母:<input name="momo_name" type="text" id="momo_name" /> <br>
+        母:<input name="mom_name" type="text" id="momo_name" /> <br>
         父:<input name="dad_name" type="text" id="dad_name" /> <br>
       申請補助種類:<select  name="subsidy_type" type="select" id="subsidy_type" /> 
 					<option value='1'>低收入戶</option>
