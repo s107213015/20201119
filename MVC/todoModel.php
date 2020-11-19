@@ -1,7 +1,7 @@
 <?php
 require_once("dbconnect.php");
 
-function addJob($id,$name, $dad_name, $mom_name, $subsidyType) {
+function addJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	global $conn;
 	$sql = "insert into subsidyform (stuID, name, dad_name, mom_name, subsidyType) values ('$stuID','$name', '$dad_name', '$mom_name', $subsidyType);";
 	mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL	
@@ -16,7 +16,7 @@ function cancelJob($jobID) {
 
 function updateJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	global $conn;
-	if ($id== -1) {
+	if ($stuID== -1) {
 		addJob($stuID,$name, $dad_name, $mom_name, $subsidyType);
 	} else {
 		$sql = "update subsidyform set stuID='$stuID', name='$name', dad_name='$dad_name', mom_name='$mom_name', subsidyType='$subsidyType' where id=$id;";
