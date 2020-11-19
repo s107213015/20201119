@@ -10,7 +10,7 @@ require("dbconnect.php");
 </head>
 <body>
 <h1>Add New Requisition</h1>
-<form method="post" action="todoSetContronl.php">
+<form method="post" action="insert.php">
         申請人: <input name="name" type="text" id="name" /> <br>
         學號: <input name="id" type="text" id="id" /> <br>
         家庭狀況:<br>
