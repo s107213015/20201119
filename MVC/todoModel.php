@@ -24,15 +24,23 @@ function updateJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	}
 }
 
-function getJobList($bossMode) {
+function getJobList($id) {
 	global $conn;
-	if ($bossMode) {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from todo order by status, urgent desc;";
-	} else {
-		$sql = "select *, TIME_TO_SEC(TIMEDIFF(NOW(), addTime)) diff from todo where status = 0;";
+	if ($id == 0) {
+		$sql = "select * from subsidyform where teacher_Agree = '0'";
+	}else if($id == 1){
+		$sql = "select * from subsidyform where secretary_Agree = '0'";
 	}
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
+}
+
+function teacherupdateList($stuID,$teacher_Comment,$teacher_Agree) {
+	global $conn;
+	if ($stuID) {
+		$sql = "update subsidyform set teacher_Comment='$teacher_Comment', teacher_Agree='$teacher_Agree' where stuID='$stuID'";
+		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
+	}
 }
 
 function getJobDetail($id) {
