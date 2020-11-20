@@ -28,7 +28,7 @@ function getJobList($name) {
 	global $conn;
 	if ($name == 'teacher') {
 		$sql = "select * from subsidyform where teacher_Agree = '0'";
-	}else if($name == 'teacer'){
+	}else if($name == 'secretary'){
 		$sql = "select * from subsidyform where teacher_Agree = '1' and secretary_Agree = '0'";
 	}
 	else {
