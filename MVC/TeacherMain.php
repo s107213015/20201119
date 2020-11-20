@@ -1,13 +1,14 @@
 <?php
 session_start();
-if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
+/*if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: MainMenu.php ");
 } 
 if ($_SESSION['uID']=='0'){
 	$id = 0;
-}
+}*/
+$name = "teacher";
 require("todoModel.php");
-$result = getJobList($id);
+$result = getJobList($name);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,7 +25,7 @@ if(mysqli_num_rows($result)==0){
     echo "無申請資料";
 }else if(mysqli_num_rows($result)>0){
     echo "<table border='1' width='600px'>";
-    echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>送出</td></tr>";
+    echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>審查</td></tr>";
     while ($rs=mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>".$rs['name']."</td>";
@@ -37,7 +38,7 @@ if(mysqli_num_rows($result)==0){
         }else if ($rs['subsidyType']==3){
             echo "<td>家庭突發因素</td>";
         }
-        echo "<td><button><a href='TeacherForm.php?id={$rs['stuID']}'>送出</a></button></td>";
+        echo "<td><button><a href='TeacherForm.php?id={$rs['stuID']}'>審核</a></button></td>";
         echo "</tr>";
     }
 }
