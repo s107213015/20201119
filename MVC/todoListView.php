@@ -49,8 +49,8 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 		
 	}
 	else {							//student
-		$result = getJobList('testStudent');
-		//$result = getJobList($_SESSION['uID']);
+		//$result = getJobList('testStudent');
+		$result = getJobList($_SESSION['uID']);
 		echo "<table border='1'>";
 		echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>teacher說明</td><td>secretary說明</td><td>teacher審核</td><td>secretary審核</td><td>president審核</td></tr>";
 		
