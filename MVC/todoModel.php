@@ -38,7 +38,7 @@ function getJobList($name) {
 	return $result;
 }
 
-function teacherupdateList($stuID,$teacher_Comment,$teacher_Agree) {
+function teacherUpdateList($stuID,$teacher_Comment,$teacher_Agree) {
 	global $conn;
 	if ($stuID) {
 		$sql = "update subsidyform set teacher_Comment='$teacher_Comment', teacher_Agree='$teacher_Agree' where stuID='$stuID'";
@@ -46,20 +46,19 @@ function teacherupdateList($stuID,$teacher_Comment,$teacher_Agree) {
 	}
 }
 
-function getJobDetail($id) {
+function secretaryUpdateList($stuID,$secretary_Comment,$secretary_Agree) {
 	global $conn;
-	if ($id == -1) { //-1 stands for adding a new record
-		$rs=[
-			"id" => -1,
-			"title" => "new title",
-			"content" => "job description",
-			"urgent" => "一般"
-		];
-	} else {
-		$sql = "select id, title, content, urgent from todo where id=$id;";
-		$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
-		$rs=mysqli_fetch_assoc($result);
+	if ($stuID) {
+		$sql = "update subsidyform set secretary_Comment='$secretary_Comment', secretary_Agree='$secretary_Agree' where stuID='$stuID'";
+		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 	}
+}
+
+function getJobDetail($stuID) {
+	global $conn;
+	$sql = "select * from subsidyform where stuID='$stuID'";
+	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
+	$rs=mysqli_fetch_assoc($result);
 	return $rs;
 }
 
