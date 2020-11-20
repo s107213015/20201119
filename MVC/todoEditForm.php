@@ -4,11 +4,11 @@ session_start();
 require("todoModel.php");
 
 $stuID = $_SESSION['uID'];
-$rs = getJobDetail($stuID);
-if (!$rs) {
+//$rs = getJobDetail($stuID);
+////if (!$rs) {
 	echo "no data found";
-	exit(0);
-}
+//	exit(0);
+//}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -35,46 +35,12 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 <hr />
 <div><?php echo $msg; ?></div><hr>
 <a href="loginForm.php">login</a> | <a href="todoEditForm.php?id=-1">Add Task</a> <br>
-<table width="200" border="1">
-  <tr>
-    <td>id</td>
-    <td>title</td>
-    <td>message</td>
-	<td>Urgency</td>
-    <td>status</td>
-	<td>time used</td>
-	<td>-</td>
-  </tr>
+
 <?php
 
 while (	$rs=mysqli_fetch_assoc($result)) {
-	//echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
-	//echo "<td>{$rs['title']}</td>";
-	//echo "<td>" , htmlspecialchars($rs['content']), "</td>";
-	//echo "<td>" , htmlspecialchars($rs['urgent']), "</td>";
-	//echo "<td>{$jobStatus[$rs['status']]}</td>" ;
-	//echo "<td><font color='$fontColor'>{$rs['diff']}</font></td><td>";
-	/*switch($rs['status']) {
-		case 0:
-			if ($bossMode) {
-				echo "<a href='todoEditForm.php?id={$rs['id']}'>Edit</a>  ";	
-				echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>Cancel</a>  " ;
-			} else {
-				echo "<a href='todoSetControl.php?act=finish&id={$rs['id']}'>Finish</a>  ";
-			}
-
-			break;
-		case 1:
-			echo "<a href='todoSetControl.php?act=reject&id={$rs['id']}'>Reject</a>  ";
-			echo "<a href='todoSetControl.php?act=close&id={$rs['id']}'>Close</a>  ";
-			break;
-		default:
-			break;
-	}
-	echo "</td></tr>";*/
 	if ($_SESSION['uID']=='teacher') {	//teacher
 		header("Location: TeacherMain.php");
-		//header "<a href='TeacherMain.php'></a>  ";
 	}
 	elseif ($_SESSION['uID']=='secretary'){	//secretary
 		
@@ -83,8 +49,32 @@ while (	$rs=mysqli_fetch_assoc($result)) {
 		
 	}
 	else {							//student
-		header("Location: todoEditForm.php");
-		//getJobList($_SESSION['uID']);
+		$result = getJobList($_SESSION['uID']);
+
+		echo "<table border='1'>";
+		echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>teacher說明</td><td>secretary說明</td><td>teacher審核</td><td>secretary審核</td><td>president審核</td></tr>";
+		while ($rs=mysqli_fetch_assoc($result)) {
+			echo "<tr>";
+
+			$id = $rs['stuID'];
+			echo "<input name='id' type='hidden' id='id' value='$id'>";
+			echo "<td>".$rs['name']."</td>";
+			echo "<td>".$rs['dad_name']."</td>";
+			echo "<td>".$rs['mom_name']."</td>";
+			if ($rs['subsidyType']==1){
+				echo "<td>低收入戶</td>";
+			}else if ($rs['subsidyType']==2){
+				echo "<td>中低收入戶</td>";
+			}else if ($rs['subsidyType']==3){
+				echo "<td>家庭突發因素</td>";
+			}
+			echo "<td>".$rs['teacher_Comment']."</td>";
+			echo "<td>".$rs['secretary_Comment']."</td>";
+			echo "<td>".$rs['teacher_Agree']."</td>";
+			echo "<td>".$rs['secretary_Agree']."</td>";
+			echo "<td>".$rs['president_Agree']."</td>";
+			echo "</tr>";
+		}
 	}
 
 }
