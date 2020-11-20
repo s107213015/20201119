@@ -29,7 +29,7 @@ function getJobList($id) {
 	if ($id == 0) {
 		$sql = "select * from subsidyform where teacher_Agree = '0'";
 	}else if($id == 1){
-		$sql = "select * from subsidyform where secretary_Agree = '0'";
+		$sql = "select * from subsidyform where teacher_Agree = '1' and secretary_Agree = '0'";
 	}
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
