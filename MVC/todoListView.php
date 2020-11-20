@@ -39,23 +39,23 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 <?php
 
 while (	$rs=mysqli_fetch_assoc($result)) {
-	if ($_SESSION['uID']=='teacher') {	//teacher
+	if ($_SESSION['uID'] == 'teacher') {	//teacher
 		header("Location: TeacherMain.php");
 	}
-	elseif ($_SESSION['uID']=='secretary'){	//secretary
+	elseif ($_SESSION['uID'] == 'secretary'){	//secretary
 		
 	}
 	elseif ($_SESSION['uID']=='president'){	//president
 		
 	}
 	else {							//student
-		$result = getJobList($_SESSION['uID']);
-
+		$result = getJobList('testStudent');
+		//$result = getJobList($_SESSION['uID']);
 		echo "<table border='1'>";
 		echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>teacher說明</td><td>secretary說明</td><td>teacher審核</td><td>secretary審核</td><td>president審核</td></tr>";
+		
 		while ($rs=mysqli_fetch_assoc($result)) {
 			echo "<tr>";
-
 			$id = $rs['stuID'];
 			echo "<input name='id' type='hidden' id='id' value='$id'>";
 			echo "<td>".$rs['name']."</td>";
