@@ -3,7 +3,7 @@ session_start();
 
 require("todoModel.php");
 
-$stuID = (int)$_GET['stuID'];
+$stuID = $_SESSION['uID'];
 $rs = getJobDetail($stuID);
 if (!$rs) {
 	echo "no data found";

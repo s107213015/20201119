@@ -1,9 +1,9 @@
 <?php
 session_start();
 require("dbconnect.php");
-$id = (int)$_GET['id'];
-$sql = "select * from todo where id = $id;";
-$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
+$stuID = (int)$_GET['stuID'];
+$sql = "select * from todo where id = $stuID;";
+//$result = mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 $rs=mysqli_fetch_assoc($result);
 if (! $rs) {
 	echo "no data found";

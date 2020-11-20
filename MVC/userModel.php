@@ -1,6 +1,7 @@
 <?php
 require_once("dbconnect.php");
 
+
 function checkUserIDPwd($userName, $passWord) {
 	global $conn;
 $userName = mysqli_real_escape_string($conn,$userName);
