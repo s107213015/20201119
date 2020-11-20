@@ -3,17 +3,11 @@ session_start();
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 } 
-$userMode = 0; //student
-if ($_SESSION['uID']=='teacher'){
-	$userMode = 1;
+if ($_SESSION['uID']=='boss'){
+	$bossMode = 1;
+} else {
+	$bossMode=0;
 }
-if ($_SESSION['uID']=='secretary'){
-	$userMode = 2;
-}
-if ($_SESSION['uID']=='president'){
-	$userMode = 3;
-}
-
 require("todoModel.php");
 if (isset($_GET['m'])){
 	$msg="<font color='red'>" . $_GET['m'] . "</font>";
@@ -42,80 +36,47 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 <div><?php echo $msg; ?></div><hr>
 <a href="loginForm.php">login</a> | <a href="todoEditForm.php?id=-1">Add Task</a> <br>
 
-<table width="200" border="1">
-  <tr>
-    <td>id</td>
-    <td>title</td>
-    <td>message</td>
-	<td>Urgency</td>
-    <td>status</td>
-	<td>time used</td>
-	<td>-</td>
-  </tr>
 <?php
 
-if ($userMode = 0) {
-	echo "<a href='AddForm.php?stuID={$rs['stuID']}'>Apply new form</a>"; //AddForm.php
-	//show id application
-}
-if ($userMode = 1) {
-	//show all forms to be sign & commend
-}
-if ($userMode = 2) {
-	//show all forms to be sign & commend
-}
-if ($userMode = 3) {
-	//show all forms to be sign
-}
-
-
-
 while (	$rs=mysqli_fetch_assoc($result)) {
-	switch($rs['urgent']) {
-		case '緊急':
-			$bgColor="#ff9999";
-			$timeLimit = 60;
-			break;
-		case '重要':
-			$bgColor="#99ff99";
-			$timeLimit = 120;
-			break;
-		default:
-			$bgColor="#ffffff";
-			$timeLimit = 180;
-			break;
+	if ($_SESSION['uID'] == 'teacher') {	//teacher
+		header("Location: TeacherMain.php");
 	}
-
-	if ($rs['diff']>$timeLimit) {
-		$fontColor="red";
-	} else {
-		$fontColor="black";		
+	elseif ($_SESSION['uID'] == 'secretary'){	//secretary
+		
 	}
-
-	echo "<tr style='background-color:$bgColor;'><td>" . $rs['id'] . "</td>";
-	echo "<td>{$rs['title']}</td>";
-	echo "<td>" , htmlspecialchars($rs['content']), "</td>";
-	echo "<td>" , htmlspecialchars($rs['urgent']), "</td>";
-	echo "<td>{$jobStatus[$rs['status']]}</td>" ;
-	echo "<td><font color='$fontColor'>{$rs['diff']}</font></td><td>";
-	switch($rs['status']) {
-		case 0:
-			if ($bossMode) {
-				echo "<a href='todoEditForm.php?id={$rs['id']}'>Edit</a>  ";	
-				echo "<a href='todoSetControl.php?act=cancel&id={$rs['id']}'>Cancel</a>  " ;
-			} else {
-				echo "<a href='todoSetControl.php?act=finish&id={$rs['id']}'>Finish</a>  ";
+	elseif ($_SESSION['uID']=='president'){	//president
+		
+	}
+	else {							//student
+		//$result = getJobList('testStudent');
+		$result = getJobList($_SESSION['uID']);
+		echo "<table border='1'>";
+		echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>teacher說明</td><td>secretary說明</td><td>teacher審核</td><td>secretary審核</td><td>president審核</td></tr>";
+		
+		while ($rs=mysqli_fetch_assoc($result)) {
+			echo "<tr>";
+			$id = $rs['stuID'];
+			echo "<input name='id' type='hidden' id='id' value='$id'>";
+			echo "<td>".$rs['name']."</td>";
+			echo "<td>".$rs['dad_name']."</td>";
+			echo "<td>".$rs['mom_name']."</td>";
+			if ($rs['subsidyType']==1){
+				echo "<td>低收入戶</td>";
+			}else if ($rs['subsidyType']==2){
+				echo "<td>中低收入戶</td>";
+			}else if ($rs['subsidyType']==3){
+				echo "<td>家庭突發因素</td>";
 			}
-
-			break;
-		case 1:
-			echo "<a href='todoSetControl.php?act=reject&id={$rs['id']}'>Reject</a>  ";
-			echo "<a href='todoSetControl.php?act=close&id={$rs['id']}'>Close</a>  ";
-			break;
-		default:
-			break;
+			echo "<td>".$rs['teacher_Comment']."</td>";
+			echo "<td>".$rs['secretary_Comment']."</td>";
+			echo "<td>".$rs['teacher_Agree']."</td>";
+			echo "<td>".$rs['secretary_Agree']."</td>";
+			echo "<td>".$rs['president_Agree']."</td>";
+			echo "</tr>";
+		}
 	}
-	echo "</td></tr>";
+
 }
 ?>
 </table>

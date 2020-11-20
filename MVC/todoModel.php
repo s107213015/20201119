@@ -24,12 +24,15 @@ function updateJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	}
 }
 
-function getJobList($id) {
+function getJobList($name) {
 	global $conn;
-	if ($id == 0) {
+	if ($name == 'teacher') {
 		$sql = "select * from subsidyform where teacher_Agree = '0'";
-	}else if($id == 1){
+	}else if($name == 'teacer'){
 		$sql = "select * from subsidyform where teacher_Agree = '1' and secretary_Agree = '0'";
+	}
+	else {
+		$sql = "select * from subsidyform where name = '$name'";
 	}
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
