@@ -3,11 +3,11 @@ session_start();
 if (! isset($_SESSION['uID']) or $_SESSION['uID']<="") {
 	header("Location: loginForm.php");
 } 
-if ($_SESSION['uID']=='boss'){
-	$bossMode = 1;
-} else {
-	$bossMode=0;
-}
+//if ($_SESSION['uID']=='boss'){
+	//$bossMode = 1;
+//} else {
+	//$bossMode=0;
+//}
 require("todoModel.php");
 if (isset($_GET['m'])){
 	$msg="<font color='red'>" . $_GET['m'] . "</font>";
@@ -17,7 +17,8 @@ if (isset($_GET['m'])){
 
 
 
-$result=getJobList($bossMode);
+$loginID=$_SESSION['uID'];
+$result=getJobList($loginID);
 $jobStatus = array('未完成','已完成','已結案','已取消');
 
 
@@ -38,19 +39,19 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 
 <?php
 
-while (	$rs=mysqli_fetch_assoc($result)) {
-	if ($_SESSION['uID'] == 'teacher') {	//teacher
+while ($rs=mysqli_fetch_assoc($result)) {
+	if ($loginID == 'teacher') {	//teacher
 		header("Location: TeacherMain.php");
 	}
-	elseif ($_SESSION['uID'] == 'secretary'){	//secretary
-		
+	elseif ($loginID == 'secretary'){	//secretary
+		header("Location: SecretaryMain.php");
 	}
-	elseif ($_SESSION['uID']=='president'){	//president
+	elseif ($loginID=='president'){	//president
 		
 	}
 	else {							//student
 		//$result = getJobList('testStudent');
-		$result = getJobList($_SESSION['uID']);
+		$result = getJobList($loginID);
 		echo "<table border='1'>";
 		echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>teacher說明</td><td>secretary說明</td><td>teacher審核</td><td>secretary審核</td><td>president審核</td></tr>";
 		
