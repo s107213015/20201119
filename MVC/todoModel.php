@@ -16,7 +16,7 @@ function cancelJob($jobID) {
 
 function updateJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	global $conn;
-	if ($stuID== -1) {
+	if ($stuID == -1) {
 		addJob($stuID,$name, $dad_name, $mom_name, $subsidyType);
 	} else {
 		$sql = "update subsidyform set stuID='$stuID', name='$name', dad_name='$dad_name', mom_name='$mom_name', subsidyType='$subsidyType' where id=$id;";
@@ -24,15 +24,15 @@ function updateJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	}
 }
 
-function getJobList($name) {
+function getJobList($loginID) {
 	global $conn;
-	if ($name == 'teacher') {
+	if ($loginID == 'teacher') {
 		$sql = "select * from subsidyform where teacher_Agree = '0'";
-	}else if($name == 'secretary'){
+	}else if($loginID == 'secretary'){
 		$sql = "select * from subsidyform where teacher_Agree = '1' and secretary_Agree = '0'";
 	}
 	else {
-		$sql = "select * from subsidyform where name = '$name'";
+		$sql = "select * from subsidyform where stuID = '$loginID'";
 	}
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
