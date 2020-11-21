@@ -6,9 +6,9 @@ session_start();
 if ($_SESSION['uID']=='0'){
 	$id = 0;
 }*/
-$name = "teacher";
+$loginID = "teacher";
 require("todoModel.php");
-$result = getJobList($name);
+$result = getJobList($loginID);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
