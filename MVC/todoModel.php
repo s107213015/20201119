@@ -41,7 +41,7 @@ function getJobList($loginID) {
 function teacherUpdateList($stuID,$teacher_Comment,$teacher_Agree) {
 	global $conn;
 	if ($stuID) {
-		$sql = "update subsidyform set teacher_Comment='$teacher_Comment', teacher_Agree='$teacher_Agree' where stuID='$stuID'";
+		$sql = "update subsidyform set teacher_Comment='$teacher_Comment', teacher_Agree='$teacher_Agree' ,'$teacher_Agree'= '1' where stuID='$stuID'";
 		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 	}
 }
@@ -88,6 +88,12 @@ function presidentJobList($loginID) {
 	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
 	return $result;
 }
-
+function presidentUpdateList($stuID,$secretary_Comment,$secretary_Agree) {
+	global $conn;
+	if ($stuID) {
+		$sql = "update subsidyform set secretary_Comment='$secretary_Comment', secretary_Agree='$secretary_Agree' ,subsidyAmount='$subsidyAmount' where stuID='$stuID'";
+		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
+	}
+}
 
 ?>
