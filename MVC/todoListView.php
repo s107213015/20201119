@@ -76,7 +76,7 @@ while ($rs=mysqli_fetch_assoc($result)) {
             }else{
                 echo "<td>通過</td>";
             }
-			if ($rs['scretary_Agree']==0){
+			if ($rs['secretary_Agree']==0){
                 echo "<td>尚未審查</td>";
             }else{
                 echo "<td>通過</td>";
