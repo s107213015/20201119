@@ -4,7 +4,7 @@ require("todoModel.php");
 /*if (! isset($_SESSION['uID']) or $_SESSION['uID']!="boss") {
 	header("Location: loginForm.php");
 } */
-$stuID = (int)$_GET['id'];
+$stuID = $_SESSION['uID'];
 $rs = getJobDetail($stuID);
 if (! $rs) {
 	echo "no data found";

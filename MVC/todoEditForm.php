@@ -6,7 +6,7 @@ require("todoModel.php");
 $stuID = $_SESSION['uID'];
 //$rs = getJobDetail($stuID);
 ////if (!$rs) {
-	echo "no data found";
+	//echo "no data found";
 //	exit(0);
 //}
 
@@ -22,7 +22,7 @@ $stuID = $_SESSION['uID'];
 <body>
 	<h1>Edit Task</h1>
 	<form method="post" action="todoUpdControl.php">
-		//($stuID,$name, $dad_name, $mom_name, $subsidyType)
+		($stuID,$name, $dad_name, $mom_name, $subsidyType)
 		<input type='hidden' name='stuID' value='<?php echo $stuID ?>'>
 		申請人: <input name="name" type="text" id="name" /> <br>
 		學號: <input name="stuID" type="text" id="stuID" /> <br>
