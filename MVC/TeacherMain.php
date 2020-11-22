@@ -17,7 +17,7 @@ $result = getJobList($loginID);
 <title>Teacher</title>
 </head>
 <body>
-<p>my List !! </p>
+<button><a href='loginForm.php'>ya!</a></button>
 <hr />
 
 <?php
