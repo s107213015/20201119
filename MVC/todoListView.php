@@ -47,7 +47,7 @@ while ($rs=mysqli_fetch_assoc($result)) {
 		header("Location: SecretaryMain.php");
 	}
 	elseif ($loginID=='president'){	//president
-		
+		header("Location: presidentMAIN.php");
 	}
 	else {							//student
 		//$result = getJobList('testStudent');
@@ -71,9 +71,21 @@ while ($rs=mysqli_fetch_assoc($result)) {
 			}
 			echo "<td>".$rs['teacher_Comment']."</td>";
 			echo "<td>".$rs['secretary_Comment']."</td>";
-			echo "<td>".$rs['teacher_Agree']."</td>";
-			echo "<td>".$rs['secretary_Agree']."</td>";
-			echo "<td>".$rs['president_Agree']."</td>";
+			if ($rs['teacher_Agree']==0){
+                echo "<td>尚未審查</td>";
+            }else{
+                echo "<td>通過</td>";
+            }
+			if ($rs['scretary_Agree']==0){
+                echo "<td>尚未審查</td>";
+            }else{
+                echo "<td>通過</td>";
+            }
+			if ($rs['president_Agree']==0){
+                echo "<td>尚未審查</td>";
+            }else{
+                echo "<td>通過</td>";
+            }
 			echo "</tr>";
 		}
 	}
