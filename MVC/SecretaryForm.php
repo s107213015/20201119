@@ -39,6 +39,7 @@ if (! $rs) {
 ?>
 </table><br>
     說明:<input name='secretary_Comment' type='text' id='secretary_Comment'><br>
+    金額:<input name='subsidyAmount' type='text' id='subsidyAmount'><br>
 	審核: <select  name="secretary_Agree" type="select" id="secretary_Agree" /> 
 		<option value='0'>未審核</option>
 		<option value='1'>通過</option>
