@@ -16,7 +16,7 @@ function cancelJob($jobID) {
 
 function updateJob($stuID,$name, $dad_name, $mom_name, $subsidyType) {
 	global $conn;
-	if ($stuID == -1) {
+	if ($name != NULL) {
 		addJob($stuID,$name, $dad_name, $mom_name, $subsidyType);
 	} else {
 		$sql = "update subsidyform set stuID='$stuID', name='$name', dad_name='$dad_name', mom_name='$mom_name', subsidyType='$subsidyType' where id=$id;";
@@ -49,7 +49,7 @@ function teacherUpdateList($stuID,$teacher_Comment,$teacher_Agree) {
 function secretaryUpdateList($stuID,$secretary_Comment,$secretary_Agree) {
 	global $conn;
 	if ($stuID) {
-		$sql = "update subsidyform set secretary_Comment='$secretary_Comment', secretary_Agree='$secretary_Agree' where stuID='$stuID'";
+		$sql = "update subsidyform set secretary_Comment='$secretary_Comment', secretary_Agree='$secretary_Agree' ,subsidyAmount='$subsidyAmount' where stuID='$stuID'";
 		mysqli_query($conn, $sql) or die("Insert failed, SQL query error"); //執行SQL
 	}
 }
@@ -79,6 +79,14 @@ function setClosed($jobID) {
 	global $conn;
 	$sql = "update subsidyform set status = 2 where id=$jobID and status = 1;";
 	mysqli_query($conn,$sql);
+}
+function presidentJobList($loginID) {
+	global $conn;
+	if ($loginID == 'president') {
+		$sql = "select * from subsidyform where teacher_Agree = '1' and secretary_Agree = '1'";
+	}
+	$result=mysqli_query($conn,$sql) or die("DB Error: Cannot retrieve message.");
+	return $result;
 }
 
 
