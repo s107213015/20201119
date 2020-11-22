@@ -46,7 +46,7 @@ function teacherUpdateList($stuID,$teacher_Comment,$teacher_Agree) {
 	}
 }
 
-function secretaryUpdateList($stuID,$secretary_Comment,$secretary_Agree) {
+function secretaryUpdateList($stuID,$secretary_Comment,$secretary_Agree,$subsidyAmount) {
 	global $conn;
 	if ($stuID) {
 		$sql = "update subsidyform set secretary_Comment='$secretary_Comment', secretary_Agree='$secretary_Agree' ,subsidyAmount='$subsidyAmount' where stuID='$stuID'";

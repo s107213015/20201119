@@ -6,9 +6,9 @@ session_start();
 if ($_SESSION['uID']=='1'){
 	$id = 1;
 }*/
-$name = "secretary";
+$loginID = "secretary";
 require("todoModel.php");
-$result = getJobList($name);
+$result = getJobList($loginID);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -17,7 +17,7 @@ $result = getJobList($name);
 <title>Secretary</title>
 </head>
 <body>
-<p>my List !! </p>
+<button><a href='loginForm.php'>ya!</a></button>
 <hr />
 <?php
 if(mysqli_num_rows($result)==0){
@@ -27,8 +27,8 @@ if(mysqli_num_rows($result)==0){
     echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>審查</td></tr>";
     while ($rs=mysqli_fetch_assoc($result)) {
         echo "<tr>";
-        $id = $rs['stuID'];
-        echo "<input name='id' type='hidden' id='id' value='$id'>";
+        //$id = $rs['stuID'];
+        //echo "<input name='id' type='hidden' id='id' value='$id'>";
         echo "<td>".$rs['name']."</td>";
         echo "<td>".$rs['dad_name']."</td>";
         echo "<td>".$rs['mom_name']."</td>";
