@@ -18,7 +18,7 @@ if (! $rs) {
 <title>SecretaryForm</title>
 </head>
 <body>
-<h1>Edit Task</h1>
+<h1>秘書審核</h1>
 <form method="post" action="SecretaryUpdate.php">
 <input type='hidden' name='stuID' value='<?php echo $stuID ?>'>
 <table border='1' width='600px'>

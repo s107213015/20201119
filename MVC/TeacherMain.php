@@ -17,7 +17,7 @@ $result = getJobList($loginID);
 <title>Teacher</title>
 </head>
 <body>
-<button><a href='loginForm.php'>ya!</a></button>
+<p>my List !! </p>
 <hr />
 
 <?php
@@ -25,10 +25,11 @@ if(mysqli_num_rows($result)==0){
     echo "無申請資料";
 }else if(mysqli_num_rows($result)>0){
     echo "<table border='1' width='600px'>";
-    echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>審查</td></tr>";
+    echo "<tr><td>申請人</td><td>學號</td><td>父</td><td>母</td><td>申請補助種類</td><td>審查</td></tr>";
     while ($rs=mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>".$rs['name']."</td>";
+        echo "<td>".$rs['stuID']."</td>";
         echo "<td>".$rs['dad_name']."</td>";
         echo "<td>".$rs['mom_name']."</td>";
         if ($rs['subsidyType']==1){

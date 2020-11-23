@@ -5,7 +5,6 @@ require("todoModel.php");
 	header("Location: loginForm.php");
 } */
 $stuID = (int)$_GET['id'];
-//echo "<h1>stuID: $stuID</h1>";
 $rs = getJobDetail($stuID);
 if (! $rs) {
 	echo "no data found";
@@ -23,10 +22,11 @@ if (! $rs) {
 <form method="post" action="TeacherUpdate.php">
 <input type='hidden' name='stuID' value='<?php echo $stuID ?>'>
 <table border='1' width='600px'>
-<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td></tr>
+<tr><td>申請人</td><td>學號</td><td>父</td><td>母</td><td>申請補助種類</td></tr>
 <?php
     echo "<tr>";
     echo "<td>".$rs['name']."</td>";
+    echo "<td>".$rs['stuID']."</td>";
     echo "<td>".$rs['dad_name']."</td>";
     echo "<td>".$rs['mom_name']."</td>";
     if ($rs['subsidyType']==1){

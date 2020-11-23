@@ -17,21 +17,22 @@ $result = getJobList($loginID);
 <title>Secretary</title>
 </head>
 <body>
-<button><a href='loginForm.php'>ya!</a></button>
+<p>秘書 </p>
 <hr />
 <?php
 if(mysqli_num_rows($result)==0){
     echo "無申請資料";
 }else if(mysqli_num_rows($result)>0){
     echo "<table border='1' width='600px'>";
-    echo "<tr><td>申請人</td><td>父</td><td>母</td><td>申請補助種類</td><td>審查</td></tr>";
+    echo "<tr><td>申請人</td><td>父</td><td>母</td><td>金額</td><td>申請補助種類</td><td>審查</td></tr>";
     while ($rs=mysqli_fetch_assoc($result)) {
         echo "<tr>";
-        //$id = $rs['stuID'];
-        //echo "<input name='id' type='hidden' id='id' value='$id'>";
+        $id = $rs['stuID'];
+        echo "<input name='id' type='hidden' id='id' value='$id'>";
         echo "<td>".$rs['name']."</td>";
         echo "<td>".$rs['dad_name']."</td>";
         echo "<td>".$rs['mom_name']."</td>";
+        echo "<td>".$rs['subsidyAmount']."</td>";
         if ($rs['subsidyType']==1){
             echo "<td>低收入戶</td>";
         }else if ($rs['subsidyType']==2){

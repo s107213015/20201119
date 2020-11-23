@@ -31,10 +31,6 @@ $jobStatus = array('未完成','已完成','已結案','已取消');
 
 <?php
 
-echo "<h1>stuID: {$_SESSION['uID']}</h1>";
-echo "<h1>loginID: {$loginID}</h1>";
-
-
 if ($loginID == 'teacher') {	//teacher
 	header("Location: TeacherMain.php");
 }
